@@ -1,0 +1,46 @@
+{
+  "name": "Зайцев Артем Алексеевич",
+  "title": "Backend-разработчик",
+  "github_username": "IfoRRR",
+  "about": "Backend-разработчик, увлекаюсь Go и проектированием надёжных API. Строю серверные приложения с WebSocket, REST и базами данных — от real-time чатов до fullstack-сервисов. Люблю чистую архитектуру, graceful shutdown и когда код работает предсказуемо под нагрузкой.",
+  "skills": [
+    { "name": "Go", "level": 85 },
+    { "name": "PostgreSQL", "level": 75 },
+    { "name": "Docker", "level": 70 },
+    { "name": "REST API", "level": 90 },
+    { "name": "SQLite", "level": 80 },
+    { "name": "WebSocket", "level": 85 },
+    { "name": "Vue.js", "level": 65 }
+  ],
+  "contact": {
+    "email": "kykria@yandex.ru",
+    "telegram": "@marshmalw",
+    "github": "https://github.com/IfoRRR"
+  },
+  "featured_repos": [
+    "WEB-socket",
+    "WEB-Socket-2.0",
+    "URL-SHORTENER"
+  ],
+  "fallback_projects": [
+    {
+      "name": "WEB-socket",
+      "description": "WebSocket чат на Go с комнатами, SQLite и REST API",
+      "url": "https://github.com/IfoRRR/WEB-socket",
+      "language": "Go"
+    },
+    {
+      "name": "WEB-Socket-2.0",
+      "description": "Vue.js фронтенд для WebSocket чата",
+      "url": "https://github.com/IfoRRR/WEB-Socket-2.0",
+      "language": "Vue"
+    },
+    {
+      "name": "URL-SHORTENER",
+      "description": "Fullstack сокращатель ссылок — Go + Vue + SQLite",
+      "url": "https://github.com/IfoRRR/URL-SHORTENER",
+      "language": "Go"
+    }
+  ],
+  "resume_file": "assets/resume.pdf"
+}
