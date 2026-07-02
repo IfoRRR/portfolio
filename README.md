@@ -16,11 +16,7 @@ portfolio/
 
 ## Быстрый старт
 
-### 1. Резюме
-
-Положи свой PDF в `backend/assets/resume.pdf` (замени placeholder).
-
-### 2. Бэкенд
+### 1. Бэкенд
 
 ```powershell
 cd backend
@@ -29,7 +25,7 @@ go run .
 
 API: http://localhost:8080
 
-### 3. Фронтенд (режим разработки)
+### 2. Фронтенд (режим разработки)
 
 ```powershell
 cd frontend
@@ -39,7 +35,7 @@ npm run dev
 
 Сайт: http://localhost:5173 (запросы к API проксируются на :8080)
 
-### 4. Production (один сервер)
+### 3. Production (один сервер)
 
 ```powershell
 cd frontend
@@ -68,16 +64,7 @@ Go отдаёт и API, и собранный Vue из `frontend/dist`.
 Каждый клик по проекту, контакту или скачивание резюме сохраняется в `backend/analytics.json`.
 На сайте есть раздел **«Статистика»** с live-данными.
 
-## Настройка
-
-Редактируй `backend/config.json`:
-
-- `name`, `title`, `about` — текст о себе
-- `skills` — навыки и уровень (0–100)
-- `contact` — email, telegram, github
-- `featured_repos` — какие репозитории показывать первыми
-
-## Твои проекты
+## Мои проекты
 
 - [WEB-socket](https://github.com/IfoRRR/WEB-socket) — WebSocket чат на Go + SQLite
 - [WEB-Socket-2.0](https://github.com/IfoRRR/WEB-Socket-2.0) — Vue фронтенд для чата
