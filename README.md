@@ -1,14 +1,25 @@
 # Портфолио — Зайцев Артем
 
-Сайт-портфолио на **Vue 3 + Go** с REST API, автозагрузкой проектов с GitHub и аналитикой кликов.
+Сайт-портфолио backend/frontend-разработчика на **Vue 3 + Go** с REST API, автоматической загрузкой проектов с GitHub и аналитикой кликов.
+
+## Избранные проекты
+
+| Проект | Что показывает |
+|---|---|
+| [vk-feed](https://github.com/IfoRRR/vk-feed) | Go, PostgreSQL, Redis, cursor pagination, идемпотентные лайки |
+| [vk-music-demo](https://github.com/IfoRRR/vk-music-demo) | worker pool, Redis, PostgreSQL, REST API, graceful shutdown |
+| [grpc-auth](https://github.com/IfoRRR/grpc-auth) | JWT, REST, gRPC interceptor и metadata |
+| [WEB-socket](https://github.com/IfoRRR/WEB-socket) | WebSocket, комнаты, SQLite, concurrent Go |
+| [photo-editor](https://github.com/IfoRRR/photo-editor) | Vue, Canvas и client-side обработка изображений |
+| [URL-SHORTENER](https://github.com/IfoRRR/URL-SHORTENER) | Fullstack Go + Vue, короткие ссылки и аналитика |
 
 ## Структура
 
-```
+```text
 portfolio/
 ├── backend/          ← Go REST API
 │   ├── main.go
-│   ├── config.json   ← твои данные (имя, навыки, контакты)
+│   ├── config.json   ← данные профиля и контакты
 │   └── assets/resume.pdf
 └── frontend/         ← Vue 3 + Vite
     └── src/
@@ -16,56 +27,52 @@ portfolio/
 
 ## Быстрый старт
 
-### 1. Бэкенд
+### Backend
 
-```powershell
+```bash
 cd backend
 go run .
 ```
 
-API: http://localhost:8080
+### Frontend в development
 
-### 2. Фронтенд (режим разработки)
-
-```powershell
+```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-Сайт: http://localhost:5173 (запросы к API проксируются на :8080)
+Сайт: `http://localhost:5173`  
+API: `http://localhost:8080`
 
-### 3. Production (один сервер)
+### Production
 
-```powershell
+```bash
 cd frontend
+npm install
 npm run build
-
 cd ../backend
 go run .
 ```
 
-Go отдаёт и API, и собранный Vue из `frontend/dist`.
+Go отдаёт REST API и собранный Vue frontend.
 
 ## REST API
 
 | Метод | URL | Описание |
-|-------|-----|----------|
-| GET | `/api/about` | Имя, описание, навыки, контакты |
-| GET | `/api/projects` | Проекты с GitHub |
-| GET | `/api/skills` | Навыки |
-| GET | `/api/contact` | Контакты |
-| GET | `/api/analytics` | Статистика кликов и скачиваний |
-| POST | `/api/analytics/click` | Записать клик `{ "link": "...", "type": "project" }` |
-| GET | `/api/resume` | Скачать резюме (+ счётчик) |
+|---|---|---|
+| `GET` | `/api/about` | профиль, описание и контакты |
+| `GET` | `/api/projects` | список проектов с GitHub |
+| `GET` | `/api/skills` | навыки |
+| `GET` | `/api/contact` | контакты |
+| `GET` | `/api/analytics` | статистика просмотров и кликов |
+| `POST` | `/api/analytics/click` | запись клика |
+| `GET` | `/api/resume` | скачивание резюме |
 
 ## Аналитика
 
-Каждый клик по проекту, контакту или скачивание резюме сохраняется в `backend/analytics.json`.
-На сайте есть раздел **«Статистика»** с live-данными.
+Клики по проектам, контактам и скачивания резюме сохраняются локально в backend. Секреты и `.env` не должны попадать в публичный репозиторий.
 
-## Мои проекты
+## Направление
 
-- [WEB-socket](https://github.com/IfoRRR/WEB-socket) — WebSocket чат на Go + SQLite
-- [WEB-Socket-2.0](https://github.com/IfoRRR/WEB-Socket-2.0) — Vue фронтенд для чата
-- [URL-SHORTENER](https://github.com/IfoRRR/URL-SHORTENER) — Fullstack Go + Vue
+Основной фокус портфолио: **Go backend, PostgreSQL, Redis, Docker, gRPC, WebSocket и Vue**.
