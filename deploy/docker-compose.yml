@@ -1,0 +1,117 @@
+services:
+  portfolio-api:
+    build:
+      context: ../..
+      dockerfile: portfolio/deploy/dockerfiles/portfolio-api.Dockerfile
+    environment:
+      PORT: "8080"
+      CONFIG_PATH: /app/config/config.json
+      DB_PATH: /data/analytics.json
+      STATIC_DIR: /app/frontend
+    volumes:
+      - portfolio-analytics:/data
+      - portfolio-resume:/data/resume
+    networks: [site]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8080/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  websocket:
+    build:
+      context: ../..
+      dockerfile: portfolio/deploy/dockerfiles/websocket.Dockerfile
+    environment:
+      CHAT_DB_PATH: /data/messages.db
+    volumes:
+      - chat-data:/data
+    networks: [site]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8080/ping"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  shortener:
+    build:
+      context: ../..
+      dockerfile: portfolio/deploy/dockerfiles/shortener.Dockerfile
+    environment:
+      STORAGE_PATH: /data/storage.db
+    volumes:
+      - shortener-data:/data
+    networks: [site]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8282/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  quiz:
+    build:
+      context: ../..
+      dockerfile: portfolio/deploy/dockerfiles/quiz.Dockerfile
+    environment:
+      HTTP_ADDR: 0.0.0.0:8093
+      STATIC_DIR: /app/static/quiz
+      DATA_FILE: /data/quiz-store.json
+    volumes:
+      - quiz-data:/data
+    networks: [site]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8093/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  kanban:
+    build:
+      context: ../..
+      dockerfile: portfolio/deploy/dockerfiles/kanban.Dockerfile
+    environment:
+      HTTP_ADDR: 0.0.0.0:8094
+      STATIC_ROOT: /app/static
+      VUE_FILE: /app/static/board/vue.global.prod.js
+      ROOMS_FILE: /data/rooms.json
+      BOARD_FILE: /data/board.json
+      UPTIME_FILE: /data/uptime.json
+    volumes:
+      - kanban-data:/data
+    networks: [site]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8094/ping"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  nginx:
+    build:
+      context: ../..
+      dockerfile: portfolio/deploy/dockerfiles/nginx.Dockerfile
+    ports:
+      - "8081:80"
+    depends_on:
+      - portfolio-api
+      - websocket
+      - shortener
+      - quiz
+      - kanban
+    networks: [site]
+    restart: unless-stopped
+
+networks:
+  site:
+
+volumes:
+  portfolio-analytics:
+  portfolio-resume:
+  chat-data:
+  shortener-data:
+  quiz-data:
+  kanban-data:
