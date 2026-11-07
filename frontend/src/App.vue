@@ -7,7 +7,6 @@ import ProjectsSection from './components/ProjectsSection.vue'
 import SkillsSection from './components/SkillsSection.vue'
 import ContactSection from './components/ContactSection.vue'
 import NavBar from './components/NavBar.vue'
-import BackgroundBlobs from './components/BackgroundBlobs.vue'
 
 const about = ref(null)
 const projects = ref([])
@@ -44,7 +43,6 @@ onMounted(loadData)
 </script>
 
 <template>
-  <BackgroundBlobs />
   <NavBar />
 
   <main v-if="loading" class="loading-screen">
