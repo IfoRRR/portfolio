@@ -6,7 +6,6 @@ import AboutSection from './components/AboutSection.vue'
 import ProjectsSection from './components/ProjectsSection.vue'
 import SkillsSection from './components/SkillsSection.vue'
 import ContactSection from './components/ContactSection.vue'
-import StatsSection from './components/StatsSection.vue'
 import NavBar from './components/NavBar.vue'
 import BackgroundBlobs from './components/BackgroundBlobs.vue'
 
@@ -62,7 +61,6 @@ onMounted(loadData)
     <AboutSection :about="about" />
     <ProjectsSection :projects="projects" @stats-updated="refreshStats" />
     <SkillsSection :skills="about.skills" />
-    <StatsSection :stats="stats" />
     <ContactSection :contact="about.contact" @stats-updated="refreshStats" />
   </main>
 

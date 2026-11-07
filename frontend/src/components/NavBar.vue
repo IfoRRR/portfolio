@@ -3,7 +3,6 @@ const links = [
   { href: '#about', label: 'Обо мне' },
   { href: '#projects', label: 'Проекты' },
   { href: '#skills', label: 'Навыки' },
-  { href: '#stats', label: 'Статистика' },
   { href: '#contact', label: 'Контакты' },
 ]
 </script>

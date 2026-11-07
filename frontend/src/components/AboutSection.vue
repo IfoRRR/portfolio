@@ -62,8 +62,8 @@ defineProps({
 .highlight {
   padding: 1.25rem;
   border-radius: 16px;
-  background: rgba(155, 93, 229, 0.08);
-  border: 1px solid rgba(155, 93, 229, 0.2);
+  background: rgba(65, 90, 119, 0.18);
+  border: 1px solid rgba(247, 37, 133, 0.18);
   display: flex;
   align-items: center;
   gap: 1rem;
