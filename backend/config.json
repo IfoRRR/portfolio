@@ -20,7 +20,10 @@
   "featured_repos": [
     "WEB-socket",
     "WEB-Socket-2.0",
-    "URL-SHORTENER"
+    "URL-SHORTENER",
+    "vk-quiz",
+    "vk-kanban",
+    "meeting-room-mvp"
   ],
   "fallback_projects": [
     {
@@ -39,6 +42,24 @@
       "name": "URL-SHORTENER",
       "description": "Fullstack сокращатель ссылок — Go + Vue + SQLite",
       "url": "https://github.com/IfoRRR/URL-SHORTENER",
+      "language": "Go"
+    },
+    {
+      "name": "vk-quiz",
+      "description": "Realtime-квиз с комнатами, таймером, WebSocket и табло",
+      "url": "https://github.com/IfoRRR/vk-quiz",
+      "language": "Go"
+    },
+    {
+      "name": "vk-kanban",
+      "description": "Командная Kanban-доска с карточками, ролями и WebSocket",
+      "url": "https://github.com/IfoRRR/vk-kanban",
+      "language": "Go"
+    },
+    {
+      "name": "meeting-room-mvp",
+      "description": "MVP системы бронирования переговорных комнат с Vue и PostgreSQL",
+      "url": "https://github.com/IfoRRR/meeting-room-mvp",
       "language": "Go"
     }
   ],

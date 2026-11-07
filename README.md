@@ -6,12 +6,12 @@
 
 | Проект | Что показывает |
 |---|---|
-| [vk-feed](https://github.com/IfoRRR/vk-feed) | Go, PostgreSQL, Redis, cursor pagination, идемпотентные лайки |
-| [vk-music-demo](https://github.com/IfoRRR/vk-music-demo) | worker pool, Redis, PostgreSQL, REST API, graceful shutdown |
-| [grpc-auth](https://github.com/IfoRRR/grpc-auth) | JWT, REST, gRPC interceptor и metadata |
 | [WEB-socket](https://github.com/IfoRRR/WEB-socket) | WebSocket, комнаты, SQLite, concurrent Go |
-| [photo-editor](https://github.com/IfoRRR/photo-editor) | Vue, Canvas и client-side обработка изображений |
+| [WEB-Socket-2.0](https://github.com/IfoRRR/WEB-Socket-2.0) | Vue-интерфейс real-time чата |
 | [URL-SHORTENER](https://github.com/IfoRRR/URL-SHORTENER) | Fullstack Go + Vue, короткие ссылки и аналитика |
+| [vk-quiz](https://github.com/IfoRRR/vk-quiz) | WebSocket-квиз с комнатами, таймером и табло |
+| [vk-kanban](https://github.com/IfoRRR/vk-kanban) | Командная Kanban-доска с ролями и realtime-обновлениями |
+| [meeting-room-mvp](https://github.com/IfoRRR/meeting-room-mvp) | MVP бронирования переговорных комнат |
 
 ## Структура
 
@@ -56,6 +56,21 @@ go run .
 ```
 
 Go отдаёт REST API и собранный Vue frontend.
+
+### Docker production
+
+Для единого входа через nginx нужны соседние каталоги `portfolio`,
+`websocket`, `url-shortener`, `vk-quiz` и `vk-kanban` в одном рабочем каталоге:
+
+```bash
+cd portfolio/deploy
+docker compose build
+docker compose up -d
+```
+
+Сайт будет доступен через `http://IP:8081/`. Наружу публикуется только nginx;
+порты приложений остаются внутри Docker-сети. Конфигурация деплоя находится в
+[`deploy/`](deploy/).
 
 ## REST API
 

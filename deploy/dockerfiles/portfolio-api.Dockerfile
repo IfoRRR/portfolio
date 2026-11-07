@@ -17,6 +17,7 @@ WORKDIR /app
 COPY --from=build /out/portfolio-api /app/portfolio-api
 COPY --from=build /src/backend/config.json /app/config/config.json
 COPY --from=build /src/backend/assets /app/assets
+COPY --from=build /src/backend/assets /app/default-resume
 COPY --from=frontend /src/frontend/dist /app/frontend
 COPY portfolio/deploy/scripts/portfolio-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

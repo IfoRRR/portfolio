@@ -36,7 +36,7 @@ func (h *Handler) writeError(w http.ResponseWriter, status int, msg string) {
 }
 
 func (h *Handler) Health(w http.ResponseWriter, r *http.Request) {
-	h.writeJSON(w, http.StatusOK, map[string]string{"status": "ok"})
+	h.writeJSON(w, http.StatusOK, map[string]bool{"ok": true})
 }
 
 func (h *Handler) About(w http.ResponseWriter, r *http.Request) {
@@ -63,6 +63,8 @@ func (h *Handler) Projects(w http.ResponseWriter, r *http.Request) {
 	projects, err := h.github.FetchRepos()
 	if err != nil {
 		projects = h.fallbackProjects()
+	} else {
+		projects = h.withConfiguredProjects(projects)
 	}
 
 	featured := h.cfg.FeaturedRepos
@@ -79,6 +81,22 @@ func (h *Handler) Projects(w http.ResponseWriter, r *http.Request) {
 	}
 
 	h.writeJSON(w, http.StatusOK, filtered)
+}
+
+func (h *Handler) withConfiguredProjects(projects []models.Project) []models.Project {
+	known := make(map[string]struct{}, len(projects))
+	for _, project := range projects {
+		known[project.Name] = struct{}{}
+	}
+
+	for _, project := range h.fallbackProjects() {
+		if _, exists := known[project.Name]; exists {
+			continue
+		}
+		projects = append(projects, project)
+	}
+
+	return projects
 }
 
 func (h *Handler) fallbackProjects() []models.Project {
