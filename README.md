@@ -59,7 +59,7 @@ Go отдаёт REST API и собранный Vue frontend.
 ### Docker production
 
 Для единого входа через nginx нужны соседние каталоги `portfolio`,
-`websocket`, `url-shortener`, `vk-quiz` и `vk-kanban` в одном рабочем каталоге:
+`websocket`, `url-shortener`, `vk-quiz`, `vk-kanban` и `meeting-room-mvp`:
 
 ```bash
 cd portfolio/deploy
@@ -67,8 +67,9 @@ docker compose build
 docker compose up -d
 ```
 
-Сайт будет доступен через `http://IP:8081/`. Наружу публикуется только nginx;
-порты приложений остаются внутри Docker-сети. Конфигурация деплоя находится в
+Сайт будет доступен через `http://IP:8081/`, переговорная — через
+`http://IP:8081/meeting/`. Наружу публикуется только nginx; порты приложений и
+PostgreSQL остаются внутри Docker-сети. Конфигурация деплоя находится в
 [`deploy/`](deploy/).
 
 ## REST API
