@@ -1,8 +1,3 @@
-FROM node:22-alpine AS frontend
-WORKDIR /src
-COPY portfolio/frontend ./frontend
-RUN cd frontend && rm -rf node_modules && npm ci && npm run build
-
 FROM golang:1.25-alpine AS build
 WORKDIR /src
 COPY portfolio/backend/go.mod ./backend/
@@ -16,7 +11,6 @@ COPY --from=build /out/portfolio-api /app/portfolio-api
 COPY --from=build /src/backend/config.json /app/config/config.json
 COPY --from=build /src/backend/assets /app/assets
 COPY --from=build /src/backend/assets /app/default-resume
-COPY --from=frontend /src/frontend/dist /app/frontend
 COPY portfolio/deploy/scripts/portfolio-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 EXPOSE 8080

@@ -7,7 +7,6 @@ services:
       PORT: "8080"
       CONFIG_PATH: /app/config/config.json
       DB_PATH: /data/analytics.json
-      STATIC_DIR: /app/frontend
     volumes:
       - portfolio-analytics:/data
       - portfolio-resume:/data/resume
@@ -18,6 +17,13 @@ services:
       interval: 30s
       timeout: 5s
       retries: 3
+
+  portfolio-frontend:
+    build:
+      context: ../..
+      dockerfile: portfolio/deploy/dockerfiles/portfolio-frontend.Dockerfile
+    networks: [site]
+    restart: unless-stopped
 
   websocket:
     build:
@@ -126,6 +132,7 @@ services:
       - "8081:80"
     depends_on:
       - portfolio-api
+      - portfolio-frontend
       - websocket
       - shortener
       - quiz
