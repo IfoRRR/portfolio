@@ -16,7 +16,7 @@ async function downloadResume() {
 <template>
   <section class="hero">
     <div class="container hero-inner fade-up">
-      <div class="hero-badge mono">backend developer</div>
+      <div class="hero-badge mono">go developer · internship</div>
 
       <img
         v-if="about.avatar_url"
@@ -30,8 +30,8 @@ async function downloadResume() {
         <span class="gradient">{{ about.name.split(' ').slice(1).join(' ') }}</span>
       </h1>
 
-      <p class="hero-title">{{ about.title }}</p>
-      <p class="hero-tagline mono">Go · PostgreSQL · Docker · REST API</p>
+      <p class="hero-title">Go-разработчик, ищу стажировку</p>
+      <p class="hero-tagline mono">Go · REST API · WebSocket · PostgreSQL</p>
 
       <div class="hero-actions">
         <a href="#projects" class="btn btn-primary">Смотреть проекты</a>

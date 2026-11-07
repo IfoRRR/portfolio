@@ -8,7 +8,7 @@ defineProps({
   <section id="about">
     <div class="container">
       <h2 class="section-title">Обо мне</h2>
-      <p class="section-sub">Кто я и чем занимаюсь</p>
+      <p class="section-sub">Коротко о моём направлении</p>
 
       <div class="about-card glass">
         <div class="about-grid">
@@ -17,16 +17,16 @@ defineProps({
           </div>
           <div class="about-highlights">
             <div class="highlight">
-              <span class="highlight-num mono">3+</span>
-              <span class="highlight-label">проекта на GitHub</span>
-            </div>
-            <div class="highlight">
               <span class="highlight-num mono">Go</span>
-              <span class="highlight-label">основной язык</span>
+              <span class="highlight-label">основной язык разработки</span>
             </div>
             <div class="highlight">
               <span class="highlight-num mono">API</span>
-              <span class="highlight-label">REST & WebSocket</span>
+              <span class="highlight-label">REST и WebSocket-сервисы</span>
+            </div>
+            <div class="highlight">
+              <span class="highlight-num mono">VPS</span>
+              <span class="highlight-label">Docker, nginx и Linux</span>
             </div>
           </div>
         </div>
