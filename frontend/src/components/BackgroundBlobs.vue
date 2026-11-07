@@ -18,15 +18,15 @@
 .blob {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.35;
-  animation: float 12s ease-in-out infinite;
+  filter: blur(120px);
+  opacity: 0.12;
+  animation: none;
 }
 
 .blob-1 {
   width: 500px;
   height: 500px;
-  background: var(--accent3);
+  background: var(--accent1);
   top: -100px;
   left: -100px;
 }
@@ -34,7 +34,7 @@
 .blob-2 {
   width: 400px;
   height: 400px;
-  background: var(--accent1);
+  background: var(--accent3);
   bottom: 10%;
   right: -80px;
   animation-delay: -4s;
@@ -43,10 +43,10 @@
 .blob-3 {
   width: 350px;
   height: 350px;
-  background: var(--accent2);
+  background: var(--accent1);
   top: 40%;
   left: 30%;
   animation-delay: -8s;
-  opacity: 0.2;
+  opacity: 0.06;
 }
 </style>

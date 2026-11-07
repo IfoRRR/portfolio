@@ -1,11 +1,24 @@
 <script setup>
 import { api } from '../api/client.js'
 
-defineProps({
+const props = defineProps({
   projects: { type: Array, required: true },
 })
 
 const emit = defineEmits(['stats-updated'])
+
+const petProjectNames = new Set(['WEB-socket', 'URL-SHORTENER', 'meeting-room-mvp'])
+const companyCaseNames = new Set(['vk-quiz', 'vk-kanban'])
+
+function projectGroup(project) {
+  if (companyCaseNames.has(project.name)) return 'company'
+  if (petProjectNames.has(project.name)) return 'pet'
+  return 'pet'
+}
+
+function projectLabel(project) {
+  return projectGroup(project) === 'company' ? 'VK case' : 'Pet project'
+}
 
 const langColors = {
   Go: '#00ADD8',
@@ -20,7 +33,7 @@ function langColor(lang) {
 }
 
 function varAccent() {
-  return '#9b5de5'
+  return '#F72585'
 }
 
 async function openProject(project) {
@@ -40,52 +53,115 @@ function formatDate(iso) {
     month: 'short',
   })
 }
+
+const petProjects = () => props.projects.filter((project) => projectGroup(project) === 'pet')
+const companyCases = () => props.projects.filter((project) => projectGroup(project) === 'company')
 </script>
 
 <template>
   <section id="projects">
     <div class="container">
       <h2 class="section-title">Проекты</h2>
-      <p class="section-sub">Мои репозитории с GitHub — клик засчитывается в статистику</p>
+      <p class="section-sub">Избранные pet-проекты и кейсы для компаний.</p>
 
-      <div class="projects-grid">
-        <article
-          v-for="(project, i) in projects"
-          :key="project.name"
-          class="project-card glass"
-          :class="{ featured: project.featured }"
-          :style="{ animationDelay: `${i * 0.1}s` }"
-          @click="openProject(project)"
-        >
-          <div class="card-top">
-            <h3 class="project-name">{{ project.name }}</h3>
-            <span
-              v-if="project.language"
-              class="lang-badge mono"
-              :style="{ '--lang-color': langColor(project.language) }"
-            >
-              {{ project.language }}
-            </span>
-          </div>
+      <div class="project-group">
+        <div class="group-heading">
+          <span class="group-kicker mono">01</span>
+          <h3>Pet-проекты</h3>
+        </div>
+        <div class="projects-grid">
+          <article
+            v-for="(project, i) in petProjects()"
+            :key="project.name"
+            class="project-card glass"
+            :style="{ animationDelay: `${i * 0.1}s` }"
+            @click="openProject(project)"
+          >
+            <span class="project-label mono">{{ projectLabel(project) }}</span>
+            <div class="card-top">
+              <h3 class="project-name">{{ project.name }}</h3>
+              <span
+                v-if="project.language"
+                class="lang-badge mono"
+                :style="{ '--lang-color': langColor(project.language) }"
+              >
+                {{ project.language }}
+              </span>
+            </div>
+            <p class="project-desc">{{ project.description || 'Pet-проект на Go' }}</p>
+            <div class="project-meta mono">
+              <span v-if="project.stars">★ {{ project.stars }}</span>
+              <span v-if="project.forks">⑂ {{ project.forks }}</span>
+              <span>{{ formatDate(project.updated_at) }}</span>
+            </div>
+          </article>
+        </div>
+      </div>
 
-          <p class="project-desc">
-            {{ project.description || 'Pet-проект на Go' }}
-          </p>
-
-          <div class="project-meta mono">
-            <span v-if="project.stars">★ {{ project.stars }}</span>
-            <span v-if="project.forks">⑂ {{ project.forks }}</span>
-            <span>{{ formatDate(project.updated_at) }}</span>
-          </div>
-
-          <div v-if="project.featured" class="featured-tag">★ featured</div>
-        </article>
+      <div class="project-group">
+        <div class="group-heading">
+          <span class="group-kicker mono">02</span>
+          <h3>Кейсы для компаний</h3>
+        </div>
+        <div class="projects-grid">
+          <article
+            v-for="(project, i) in companyCases()"
+            :key="project.name"
+            class="project-card company-card glass"
+            :style="{ animationDelay: `${i * 0.1}s` }"
+            @click="openProject(project)"
+          >
+            <span class="project-label mono">{{ projectLabel(project) }}</span>
+            <div class="card-top">
+              <h3 class="project-name">{{ project.name }}</h3>
+              <span
+                v-if="project.language"
+                class="lang-badge mono"
+                :style="{ '--lang-color': langColor(project.language) }"
+              >
+                {{ project.language }}
+              </span>
+            </div>
+            <p class="project-desc">{{ project.description || 'VK case' }}</p>
+            <div class="project-meta mono">
+              <span v-if="project.stars">★ {{ project.stars }}</span>
+              <span v-if="project.forks">⑂ {{ project.forks }}</span>
+              <span>{{ formatDate(project.updated_at) }}</span>
+            </div>
+          </article>
+          <article class="project-card placeholder-card glass">
+            <span class="project-label mono">Planned</span>
+            <h3 class="project-name">Т-Банк</h3>
+            <p class="project-desc">Заготовка для будущего кейса: задача, решение, результат и стек.</p>
+            <span class="placeholder-note mono">case study in progress</span>
+          </article>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <style scoped>
+.project-group + .project-group {
+  margin-top: 4rem;
+}
+
+.group-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.group-heading h3 {
+  font-size: 1.35rem;
+}
+
+.group-kicker {
+  color: var(--accent1);
+  font-size: 0.75rem;
+}
+
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -96,19 +172,18 @@ function formatDate(iso) {
   padding: 1.75rem;
   cursor: pointer;
   position: relative;
-  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  transition: transform 0.2s, border-color 0.2s;
   animation: fade-up 0.6s ease forwards;
   opacity: 0;
 }
 
 .project-card:hover {
-  transform: translateY(-6px) rotate(-1deg);
-  box-shadow: 0 12px 40px rgba(155, 93, 229, 0.25);
-  border-color: rgba(155, 93, 229, 0.4);
+  transform: translateY(-3px);
+  border-color: var(--accent1);
 }
 
-.project-card.featured {
-  border-color: rgba(0, 245, 212, 0.3);
+.company-card {
+  border-color: rgba(247, 37, 133, 0.35);
 }
 
 .card-top {
@@ -122,7 +197,7 @@ function formatDate(iso) {
 .project-name {
   font-size: 1.2rem;
   font-weight: 700;
-  color: var(--accent2);
+  color: var(--text);
 }
 
 .lang-badge {
@@ -150,16 +225,22 @@ function formatDate(iso) {
   opacity: 0.7;
 }
 
-.featured-tag {
-  position: absolute;
-  top: -0.5rem;
-  right: 1rem;
-  background: linear-gradient(135deg, var(--accent2), var(--accent3));
-  color: var(--bg);
-  font-size: 0.65rem;
-  font-family: 'Space Mono', monospace;
-  padding: 0.2rem 0.6rem;
-  border-radius: 999px;
-  font-weight: 700;
+.project-label {
+  display: inline-block;
+  margin-bottom: 0.8rem;
+  color: var(--accent1);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.placeholder-card {
+  border-style: dashed;
+  cursor: default;
+}
+
+.placeholder-note {
+  color: var(--muted);
+  font-size: 0.72rem;
 }
 </style>
