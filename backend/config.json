@@ -19,7 +19,6 @@
   },
   "featured_repos": [
     "WEB-socket",
-    "WEB-Socket-2.0",
     "URL-SHORTENER",
     "vk-quiz",
     "vk-kanban",
@@ -31,12 +30,6 @@
       "description": "WebSocket чат на Go с комнатами, SQLite и REST API",
       "url": "https://github.com/IfoRRR/WEB-socket",
       "language": "Go"
-    },
-    {
-      "name": "WEB-Socket-2.0",
-      "description": "Vue.js фронтенд для WebSocket чата",
-      "url": "https://github.com/IfoRRR/WEB-Socket-2.0",
-      "language": "Vue"
     },
     {
       "name": "URL-SHORTENER",

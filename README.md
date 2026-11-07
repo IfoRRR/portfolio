@@ -6,8 +6,7 @@
 
 | Проект | Что показывает |
 |---|---|
-| [WEB-socket](https://github.com/IfoRRR/WEB-socket) | WebSocket, комнаты, SQLite, concurrent Go |
-| [WEB-Socket-2.0](https://github.com/IfoRRR/WEB-Socket-2.0) | Vue-интерфейс real-time чата |
+| [WEB-socket](https://github.com/IfoRRR/WEB-socket) | Полный WebSocket-чат: Go, Vue, комнаты и SQLite |
 | [URL-SHORTENER](https://github.com/IfoRRR/URL-SHORTENER) | Fullstack Go + Vue, короткие ссылки и аналитика |
 | [vk-quiz](https://github.com/IfoRRR/vk-quiz) | WebSocket-квиз с комнатами, таймером и табло |
 | [vk-kanban](https://github.com/IfoRRR/vk-kanban) | Командная Kanban-доска с ролями и realtime-обновлениями |
