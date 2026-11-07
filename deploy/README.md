@@ -23,16 +23,16 @@ docker compose up -d
 
 Only nginx publishes `8081:80`. Application ports remain inside the Docker network.
 
-The portfolio frontend is a separate `portfolio-frontend` service. To update
-only Vue files without rebuilding the API or other applications:
+The portfolio frontend is served from the host `frontend/dist` directory. After
+the first root deployment, Vue changes do not require rebuilding or restarting
+any Docker container:
 
 ```bash
-docker compose build portfolio-frontend
-docker compose up -d --no-deps portfolio-frontend
+/home/copilot/workspace/portfolio/deploy/build-frontend.sh
 ```
 
-The nginx container keeps its existing configuration and routes `/api/...` to
-the API while serving `/` from the frontend service.
+The `portfolio-frontend` container only serves that mounted directory. Nginx
+routes `/api/...` to the API while serving `/` from the frontend service.
 
 As a one-command root deployment from the prepared VPS workspace:
 
