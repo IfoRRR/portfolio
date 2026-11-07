@@ -9,7 +9,7 @@ runuser -u copilot -- env HOME=/home/copilot \
   git -C "$ROOT" pull --ff-only
 
 cd "$ROOT/deploy"
-docker compose build portfolio-frontend portfolio-api
-docker compose up -d --force-recreate portfolio-frontend portfolio-api
+docker compose build portfolio-api
+docker compose up -d --force-recreate portfolio-frontend portfolio-api nginx
 
 echo "Site updated: http://$(hostname -I | awk '{print $1}'):8081/"
