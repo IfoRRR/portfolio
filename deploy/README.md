@@ -40,6 +40,12 @@ As a one-command root deployment from the prepared VPS workspace:
 /home/copilot/workspace/portfolio/deploy/start-as-root.sh
 ```
 
+For regular site updates, including the frontend and resume:
+
+```bash
+/home/copilot/workspace/portfolio/deploy/update-site.sh
+```
+
 The script builds the images, starts the stack, prints container status, and
 checks the public routes through nginx. It does not modify VPN configuration.
 
