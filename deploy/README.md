@@ -23,6 +23,15 @@ docker compose up -d
 
 Only nginx publishes `8081:80`. Application ports remain inside the Docker network.
 
+As a one-command root deployment from the prepared VPS workspace:
+
+```bash
+/home/copilot/workspace/portfolio/deploy/start-as-root.sh
+```
+
+The script builds the images, starts the stack, prints container status, and
+checks the public routes through nginx. It does not modify VPN configuration.
+
 The current compose stack deploys the portfolio, WebSocket chat, shortener,
 quiz, Kanban board and meeting-room MVP. The meeting room is available at
 `/meeting/` and uses an internal PostgreSQL service; neither PostgreSQL nor the
