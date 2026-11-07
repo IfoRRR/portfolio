@@ -7,7 +7,7 @@ RUN cd frontend && npm run build
 
 FROM golang:1.25-alpine AS build
 WORKDIR /src
-COPY portfolio/backend/go.mod portfolio/backend/go.sum ./backend/
+COPY portfolio/backend/go.mod ./backend/
 RUN cd backend && go mod download
 COPY portfolio/backend ./backend
 RUN cd backend && CGO_ENABLED=0 go build -o /out/portfolio-api .
