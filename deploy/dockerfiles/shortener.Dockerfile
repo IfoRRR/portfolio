@@ -1,9 +1,7 @@
 FROM node:22-alpine AS frontend
 WORKDIR /src
-COPY url-shortener/frontend/package*.json ./frontend/
-RUN cd frontend && npm ci
 COPY url-shortener/frontend ./frontend
-RUN cd frontend && npm run build
+RUN cd frontend && rm -rf node_modules && npm ci && npm run build
 
 FROM golang:1.25-alpine AS build
 WORKDIR /src
