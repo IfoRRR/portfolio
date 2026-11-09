@@ -16,8 +16,6 @@ async function downloadResume() {
 <template>
   <section class="hero">
     <div class="container hero-inner fade-up">
-      <div class="hero-badge mono">go developer · internship</div>
-
       <img
         v-if="about.avatar_url"
         :src="about.avatar_url"
@@ -25,16 +23,14 @@ async function downloadResume() {
         class="avatar"
       />
 
-      <h1 class="hero-name">
-        {{ about.name.split(' ')[0] }}
-        <span class="gradient">{{ about.name.split(' ').slice(1).join(' ') }}</span>
-      </h1>
+      <p class="hero-kicker mono">Go / backend development</p>
+      <h1 class="hero-name">{{ about.name }}</h1>
 
-      <p class="hero-title">Go-разработчик, ищу стажировку</p>
-      <p class="hero-tagline mono">Go · REST API · WebSocket · PostgreSQL</p>
+      <p class="hero-title">{{ about.title }}</p>
+      <p class="hero-description">{{ about.about }}</p>
 
       <div class="hero-actions">
-        <a href="#projects" class="btn btn-primary">Смотреть проекты</a>
+        <a href="#projects" class="btn btn-primary">Проекты</a>
         <button class="btn btn-outline" @click="downloadResume">
           ↓ Скачать резюме
         </button>
@@ -55,18 +51,6 @@ async function downloadResume() {
   text-align: center;
 }
 
-.hero-badge {
-  display: inline-block;
-  padding: 0.35rem 1rem;
-  border: 1px solid var(--accent2);
-  border-radius: 999px;
-  color: var(--accent2);
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 1.5rem;
-}
-
 .avatar {
   width: 120px;
   height: 120px;
@@ -78,18 +62,15 @@ async function downloadResume() {
 }
 
 .hero-name {
-  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  font-size: clamp(2.25rem, 6vw, 4.5rem);
   font-weight: 800;
   line-height: 1.1;
   margin-bottom: 0.5rem;
 }
 
-.gradient {
-  display: block;
-  background: linear-gradient(135deg, var(--accent2), var(--accent1), var(--accent3));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.hero-kicker {
+  color: var(--accent2);
+  margin-bottom: 1rem;
 }
 
 .hero-title {
@@ -98,11 +79,11 @@ async function downloadResume() {
   margin-bottom: 0.5rem;
 }
 
-.hero-tagline {
-  color: var(--accent2);
-  font-size: 0.85rem;
-  margin-bottom: 2rem;
-  opacity: 0.8;
+.hero-description {
+  max-width: 650px;
+  margin: 0 auto 2rem;
+  color: var(--muted);
+  line-height: 1.7;
 }
 
 .hero-actions {

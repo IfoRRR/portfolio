@@ -36,7 +36,7 @@ function openGithub(url) {
   <section id="contact">
     <div class="container">
       <h2 class="section-title">Контакты</h2>
-      <p class="section-sub">Свяжись со мной — каждый клик учитывается</p>
+      <p class="section-sub">Email, Telegram, GitHub и резюме</p>
 
       <div class="contact-grid">
         <button class="contact-card glass" @click="openEmail(contact.email)">
@@ -55,6 +55,12 @@ function openGithub(url) {
           <span class="contact-icon">⌥</span>
           <span class="contact-label">GitHub</span>
           <span class="contact-value mono">IfoRRR</span>
+        </button>
+
+        <button class="contact-card glass" @click="trackAndOpen('resume', 'resume', api.resumeUrl())">
+          <span class="contact-icon">↓</span>
+          <span class="contact-label">Резюме</span>
+          <span class="contact-value mono">PDF</span>
         </button>
       </div>
     </div>

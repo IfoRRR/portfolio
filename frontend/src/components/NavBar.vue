@@ -1,6 +1,5 @@
 <script setup>
 const links = [
-  { href: '#about', label: 'Обо мне' },
   { href: '#projects', label: 'Проекты' },
   { href: '#skills', label: 'Навыки' },
   { href: '#contact', label: 'Контакты' },
@@ -10,7 +9,7 @@ const links = [
 <template>
   <nav class="nav glass">
     <div class="container nav-inner">
-      <a href="#" class="logo mono">&lt;AA /&gt;</a>
+      <a href="#" class="logo mono">AA</a>
       <ul class="nav-links">
         <li v-for="link in links" :key="link.href">
           <a :href="link.href">{{ link.label }}</a>
