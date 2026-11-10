@@ -3,7 +3,7 @@
 The compose file expects these repositories as sibling directories:
 
 ```text
-/opt/
+/home/ubuntu/
 ├── portfolio/
 ├── vk-quiz/
 ├── vk-kanban/
@@ -23,16 +23,17 @@ docker compose up -d
 
 Only nginx publishes `8081:80`. Application ports remain inside the Docker network.
 
-The portfolio frontend is served from the host `frontend/dist` directory. After
-the first root deployment, Vue changes do not require rebuilding or restarting
-any Docker container:
+The portfolio frontend is built by
+`dockerfiles/portfolio-frontend.Dockerfile` from the current Git checkout.
+After frontend changes, rebuild `portfolio-frontend` and recreate it:
 
 ```bash
-/home/copilot/workspace/portfolio/deploy/build-frontend.sh
+docker compose build portfolio-frontend
+docker compose up -d --force-recreate portfolio-frontend nginx
 ```
 
-The `portfolio-frontend` container only serves that mounted directory. Nginx
-routes `/api/...` to the API while serving `/` from the frontend service.
+Nginx routes `/api/...` to the API while serving `/` from the frontend
+service.
 
 As a one-command root deployment from the prepared VPS workspace:
 
@@ -54,6 +55,26 @@ quiz, Kanban board and meeting-room MVP. The meeting room is available at
 `/meeting/` and uses an internal PostgreSQL service; neither PostgreSQL nor the
 application port is published to the VPS.
 
-For the first deployment, copy the resume into the `portfolio-resume` volume
-or use the bundled `backend/assets/resume.pdf` as the initial seed. Keep real
-`.env` files and application data outside Git.
+For the first deployment, use the bundled `backend/assets/resume.pdf` as the
+initial seed. Keep real `.env` files and application data outside Git.
+
+## Recovery after a VPS reset
+
+The deployment code is stored in GitHub, but `.env` and Docker volumes are
+not. Keep a backup directory outside the VPS. Create one before a migration:
+
+```bash
+sudo sh /home/ubuntu/portfolio/deploy/scripts/backup.sh
+```
+
+After provisioning a new Ubuntu VPS with Git, Docker and Compose, run:
+
+```bash
+sudo sh /home/ubuntu/portfolio/deploy/scripts/restore-vps.sh
+```
+
+The restore script clones the portfolio and its sibling repositories, creates a
+new database password only when `deploy/.env` does not exist, validates Compose,
+builds the images and starts the stack. To restore old data, copy the backed-up
+`.env` into `deploy/.env` before starting and import the volume archives from
+the backup directory. Never commit `.env` or upload it to a public repository.
